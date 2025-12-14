@@ -1,31 +1,43 @@
 import './App.css';
 import {useState} from 'react';
-import messagesData from './data/messages.json';
-import ChatEntry from './components/ChatEntry';
+import messagesJSON from './data/messages.json';
 import ChatLog from './components/ChatLog';
 
 
 
 const App = () => {
-  // const [messages, setMessages] = useState(messagesData);
-  // const [isLiked, setIsLiked] = useState(false);
+  const [messagesData, setMessages] = useState(messagesJSON);
 
-  // const entries = messagesData.map( entry => {
-  //     if (entry.id === entryId) {
-  //       return {...entries, key: entries.id};
-  //     } else {
-  //       return entries;
-  //     }
-  //   }
-  //   );
+
+  const likeMessage = (messageId) => {
+    const entries = messagesData.map((entry) => {
+      if (entry.id === messageId) {
+        return { ...entry, isLiked: !entry.isLiked };
+      } else {
+        return entry;
+      }
+    });
+    setMessages(entries);
+  };
+
+  const findSenderNames = (messagesData) => {
+    const senderNames = messagesData.map((entry) => {
+      return entry.sender;
+    });
+    return new Set(senderNames);
+  };
+
 
   return (
     <div id="App">
       <header>
-        <h1>Chat Between </h1>
+        <h1>Chat Between {Array.from(findSenderNames(messagesData)).join(' and ')}</h1>
       </header>
       <main>
-        <ChatLog entries={messagesData} />
+        <ChatLog
+          entries={messagesData}
+          onLike={likeMessage}>
+        </ChatLog>
       </main>
     </div>
   );
