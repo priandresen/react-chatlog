@@ -7,6 +7,7 @@ import ChatLog from './components/ChatLog';
 
 const App = () => {
   const [messagesData, setMessages] = useState(messagesJSON);
+  const [likeCount, setLikeCount] = useState(0);
 
 
   const likeMessage = (messageId) => {
@@ -32,6 +33,11 @@ const App = () => {
     <div id="App">
       <header>
         <h1>Chat Between {Array.from(findSenderNames(messagesData)).join(' and ')}</h1>
+        <section id="widget">
+            <h2>
+              {likeCount} ❤️'s
+              </h2>
+          </section>
       </header>
       <main>
         <ChatLog
