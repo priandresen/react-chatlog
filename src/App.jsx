@@ -13,13 +13,17 @@ const App = () => {
   const likeMessage = (messageId) => {
     const entries = messagesData.map((entry) => {
       if (entry.id === messageId) {
-        return { ...entry, isLiked: !entry.isLiked };
+        return { ...entry, liked: !entry.liked };
       } else {
         return entry;
       }
     });
     setMessages(entries);
+    setLikeCount(() => {
+      return entries.filter((entry) => entry.liked).length;
+    });
   };
+
 
   const findSenderNames = (messagesData) => {
     const senderNames = messagesData.map((entry) => {
@@ -35,7 +39,7 @@ const App = () => {
         <h1>Chat Between {Array.from(findSenderNames(messagesData)).join(' and ')}</h1>
         <section id="widget">
             <h2>
-              {likeCount} ❤️'s
+              {likeCount} ❤️s
               </h2>
           </section>
       </header>

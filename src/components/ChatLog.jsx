@@ -7,20 +7,21 @@ const ChatLog = (props) => {
   const chatEntries = props.entries.map(entry => {
     return (
       <ChatEntry
+      key={entry.id}
       id={entry.id}
       sender={entry.sender}
       body={entry.body}
-      timeStamp={entry.timeStamp}
-      isLiked={entry.isLiked}
+      time={entry.timeStamp}
+      liked={entry.liked}
       onLike={props.onLike}
       />
     );
   });
 
   return (
-    <section>
-    <p className="chat-log">{chatEntries}</p>
-    </section>
+    <div className="chat-log">
+      {chatEntries}
+    </div>
   );
 };
 
@@ -30,10 +31,10 @@ ChatLog.propTypes = {
       id: PropTypes.number.isRequired,
       sender: PropTypes.string.isRequired,
       body: PropTypes.string.isRequired,
-      timeStamp: PropTypes.string.isRequired,
-      isLiked: PropTypes.bool.isRequired,
+      time: PropTypes.instanceOf(TimeStamp).isRequired,
+      liked: PropTypes.bool.isRequired,
     })
-  ).isRequired,
+  ),
   onLike: PropTypes.func.isRequired,
 };
 
