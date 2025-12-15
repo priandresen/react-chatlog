@@ -4,14 +4,17 @@ import messagesJSON from './data/messages.json';
 import ChatLog from './components/ChatLog';
 
 
+const countTotalLikes = (messageData) => {
+  return messageData.reduce((acc, entry) => acc + entry.liked, 0);
+};
 
 const App = () => {
-  const [messagesData, setMessages] = useState(messagesJSON);
-  const [likeCount, setLikeCount] = useState(0);
+  const [messageData, setMessages] = useState(messagesJSON);
+  // const [likeCount, setLikeCount] = useState(0);
 
 
   const likeMessage = (messageId) => {
-    const entries = messagesData.map((entry) => {
+    const entries = messageData.map((entry) => {
       if (entry.id === messageId) {
         return { ...entry, liked: !entry.liked };
       } else {
@@ -19,14 +22,15 @@ const App = () => {
       }
     });
     setMessages(entries);
-    setLikeCount(() => {
-      return entries.filter((entry) => entry.liked).length;
-    });
   };
 
+  const likeCount = countTotalLikes(messageData);
 
-  const findSenderNames = (messagesData) => {
-    const senderNames = messagesData.map((entry) => {
+
+
+
+  const findSenderNames = (messageData) => {
+    const senderNames = messageData.map((entry) => {
       return entry.sender;
     });
     return new Set(senderNames);
@@ -36,7 +40,7 @@ const App = () => {
   return (
     <div id="App">
       <header>
-        <h1>Chat Between {Array.from(findSenderNames(messagesData)).join(' and ')}</h1>
+        <h1>Chat Between {Array.from(findSenderNames(messageData)).join(' and ')}</h1>
         <section id="widget">
           <h2>
             {likeCount} ❤️s
@@ -45,7 +49,7 @@ const App = () => {
       </header>
       <main>
         <ChatLog
-          entries={messagesData}
+          entries={messageData}
           onLike={likeMessage}>
         </ChatLog>
       </main>
