@@ -38,10 +38,10 @@ const App = () => {
       <header>
         <h1>Chat Between {Array.from(findSenderNames(messagesData)).join(' and ')}</h1>
         <section id="widget">
-            <h2>
-              {likeCount} ❤️s
-              </h2>
-          </section>
+          <h2>
+            {likeCount} ❤️s
+          </h2>
+        </section>
       </header>
       <main>
         <ChatLog
