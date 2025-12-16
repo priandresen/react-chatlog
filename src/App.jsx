@@ -10,8 +10,6 @@ const countTotalLikes = (messageData) => {
 
 const App = () => {
   const [messageData, setMessages] = useState(messagesJSON);
-  // const [likeCount, setLikeCount] = useState(0);
-
 
   const likeMessage = (messageId) => {
     const entries = messageData.map((entry) => {
@@ -25,9 +23,6 @@ const App = () => {
   };
 
   const likeCount = countTotalLikes(messageData);
-
-
-
 
   const findSenderNames = (messageData) => {
     const senderNames = messageData.map((entry) => {

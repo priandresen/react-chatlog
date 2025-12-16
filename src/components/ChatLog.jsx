@@ -1,7 +1,7 @@
 import ChatEntry from './ChatEntry';
 import './ChatLog.css';
 import PropTypes from 'prop-types';
-import TimeStamp from './TimeStamp';
+
 
 const ChatLog = (props) => {
   const chatEntries = props.entries.map(entry => {
@@ -31,7 +31,7 @@ ChatLog.propTypes = {
       id: PropTypes.number.isRequired,
       sender: PropTypes.string.isRequired,
       body: PropTypes.string.isRequired,
-      time: PropTypes.instanceOf(TimeStamp).isRequired,
+      time: PropTypes.string.isRequired,
       liked: PropTypes.bool.isRequired,
     })
   ),
