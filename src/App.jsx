@@ -9,6 +9,7 @@ const countTotalLikes = (messageData) => {
 };
 
 const App = () => {
+
   const [messageData, setMessages] = useState(messagesJSON);
 
   const likeMessage = (messageId) => {
